@@ -1,12 +1,18 @@
 <?php
 /**
+ * Cool Kids Network
+ *
+ * @package CoolKidsNetwork
+ * @author Zainoudine Soulé
+ *
 * Plugin Name: Cool Kids Network
 * Plugin URI: https://github.com/tasmer/Cool-Kids-Network
 * Description: Generate user with Email
 * Author: Zainoudine Soulé
 * Version: 1.0.0
+* Requires PHP: 7.4
 * Author URI: https://zainoudine-soule.net/
-*/
+ */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit to avoid access directly.

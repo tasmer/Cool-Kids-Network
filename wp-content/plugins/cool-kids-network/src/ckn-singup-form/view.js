@@ -29,14 +29,24 @@ document.addEventListener('DOMContentLoaded', function() {
             e.preventDefault();
 
             const email = document.getElementById('cnk_email').value;
+            const nonce = document.getElementById('security_cool_kid').value;
+            const message = document.getElementById('cnk_message');
+
             fetch('/wp-admin/admin-ajax.php', {
                 method: 'POST',
                 body: new URLSearchParams({
                     action: 'register_user',
-                    email: email
+                    email: email,
+                    'security_cool_kid': nonce
                 }),
-            });
-            // TODO display message after submit.
+            }).then(response => response.json()).then(json => {
+                if(json.success) {
+                    message.innerHTML = '<p class="notification-message">' + json.data.message + '</p>';
+
+                } else {
+                    message.innerHTML = '<p class="notification-message error">' + json.data.message + '</p>';
+                }
+            }).catch(error => console.error('Erreur :', error));
         })
     }
 })

@@ -1,7 +1,22 @@
 <?php
+/**
+ * Class for register User.
+ *
+ * @package CoolKidsNetwork
+ */
 
+/**
+ * Register User with fake data.
+ */
 class CKN_Registrer_User {
 
+	/**
+	 * Create fake user by email.
+	 *
+	 * @param string $user_email Email to register user.
+	 *
+	 * @return array|\WP_Error
+	 */
 	public static function create_new_user( $user_email ) {
 		// Check if user existe.
 		$user = get_user_by_email( $user_email );
@@ -15,16 +30,13 @@ class CKN_Registrer_User {
 			return $user_data;
 		}
 
-		var_dump($user_data['login']);
-
-
 		$user_id = wp_insert_user( array(
 			'user_login' => $user_data['login']['username'],
 			'user_email' => $user_email,
-			'user_pass'  => $user_data['login']['password'],
+			'user_pass'  =>  'paswword', // $user_data['login']['password'],
 			'first_name' => $user_data['name']['first'],
 			'last_name'  => $user_data['name']['last'],
-			'role'       => 'cool_kid',
+			'role'       => 'cool_kid', // Default role.
 			'display'    => $user_data['name']['first'] . ' ' . $user_data['name']['last'],
 			'meta_input' => array(
 				'country' => $user_data['location']['country'],
@@ -32,18 +44,6 @@ class CKN_Registrer_User {
 		) );
 
 		if ( is_wp_error( $user_id ) ) {
-			var_dump($user_id, array(
-				'user_login' => $user_data['login']['username'],
-				'user_email' => $user_email,
-				'user_pass'  => $user_data['login']['password'],
-				'first_name' => $user_data['name']['first'],
-				'last_name'  => $user_data['name']['last'],
-				'role'       => 'cool_kid',
-				'display'    => $user_data['name']['first'] . ' ' . $user_data['name']['last'],
-				'meta_input' => array(
-					'country' => $user_data['location']['country'],
-				),
-			));
 			return new WP_Error( 'failed_to_create_user', __( 'Unable to create user.', 'cool-kids-network' ) );
 		}
 
