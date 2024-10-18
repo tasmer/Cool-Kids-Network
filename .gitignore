@@ -1,0 +1,19 @@
+### PhpStorm ###
+.idea/
+
+### Docker local env dev ###
+docker/
+docker-compose.yml
+Dockerfile
+
+### WordPress ###
+
+# Configuration
+wp-config.php
+
+
+# Uploads
+/wp-content/uploads/
+
+# NPM/Node Dependency directories
+node_modules/
