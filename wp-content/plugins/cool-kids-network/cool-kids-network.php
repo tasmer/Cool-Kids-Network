@@ -29,8 +29,14 @@ define( 'CKN_PLUGIN_INC_DIR_PATH', CKN_PLUGIN_DIR_PATH . 'inc/' );
 
 require_once CKN_PLUGIN_INC_DIR_PATH . 'init.php';
 require_once CKN_PLUGIN_INC_DIR_PATH . 'blocks.php';
-require_once CKN_PLUGIN_INC_DIR_PATH . 'ajax-handler.php';
 
 require_once CKN_PLUGIN_DIR_PATH . 'classes/singleton.php';
+require_once CKN_PLUGIN_DIR_PATH . 'classes/ckn-ajax-handler.php';
 require_once CKN_PLUGIN_DIR_PATH . 'classes/ckn-user.php';
 require_once CKN_PLUGIN_DIR_PATH . 'classes/ckn-registrer-user.php';
+
+function cnk_plugin_load() {
+	CKN_Ajax_Handler::get_instance();
+}
+
+add_action( 'plugins_loaded',  'cnk_plugin_load' );
