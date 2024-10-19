@@ -33,3 +33,30 @@ function ckn_add_custom_roles() {
 }
 
 add_action( 'init', 'ckn_add_custom_roles' );
+
+
+add_filter( 'show_admin_bar', 'ckn_hidden_admin_bar' );
+
+/**
+ *  Hidden admin bar for user role
+ *  - cool_kid
+ *  - cooler_kid
+ *  - coolest_kid
+ *
+ * @return bool
+ */
+function ckn_hidden_admin_bar() {
+	$user_roles = wp_get_current_user()->roles;
+
+	$roles_intersect = array_intersect( $user_roles, array(
+		'cool_kid',
+		'cooler_kid',
+		'coolest_kid',
+	) );
+
+	if ( ! empty( $roles_intersect ) ) {
+		return false;
+	}
+
+	return true;
+}
