@@ -21,8 +21,8 @@ class CKN_Registrer_User {
 		// Check if user existe.
 		$user = get_user_by_email( $user_email );
 
-		if( false !== $user ) {
-			return new WP_Error('user_exist', __('User already exists.', 'cool-kids-network'));
+		if ( false !== $user ) {
+			return new WP_Error( 'user_exist', __( 'User already exists.', 'cool-kids-network' ) );
 		}
 
 		$user_data = self::get_fake_user_data();
@@ -33,7 +33,7 @@ class CKN_Registrer_User {
 		$user_id = wp_insert_user( array(
 			'user_login' => $user_data['login']['username'],
 			'user_email' => $user_email,
-			'user_pass'  =>  'paswword', // $user_data['login']['password'],
+			'user_pass'  => 'paswword', // $user_data['login']['password'],
 			'first_name' => $user_data['name']['first'],
 			'last_name'  => $user_data['name']['last'],
 			'role'       => 'cool_kid', // Default role.
@@ -64,8 +64,9 @@ class CKN_Registrer_User {
 			return new WP_Error( 'fake_data_no_available', __( 'unable to create user.', 'cool-kids-network' ) );
 		}
 		$response_body = json_decode( wp_remote_retrieve_body( $response ), true );
-		$results = isset($response_body['results']) ? array_shift($response_body['results']) :array();
+		$results       = isset( $response_body['results'] ) ? array_shift( $response_body['results'] ) : array();
 
 		return $results ?? array();
 	}
+
 }
