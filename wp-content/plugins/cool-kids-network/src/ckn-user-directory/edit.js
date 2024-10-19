@@ -32,7 +32,7 @@ import './editor.scss';
 export default function Edit() {
 	return (
 		<p { ...useBlockProps() }>
-			{ __( 'User Cool Kid Profile', 'ckn-profile' ) }
+			{ __( 'Display User Directory for user Allowed', 'cool-kids-network' ) }
 		</p>
 	);
 }
