@@ -83,7 +83,7 @@ class CKN_User {
 		$this->last_name = $this->user->last_name;
 		$this->country   = get_user_meta( $this->user->ID, 'country', true );
 		$this->email     = $this->user->user_email;
-		$this->role      = $this->user->roles[0];
+		$this->role      = ckn_get_role_name( $this->user->roles[0] );
 	}
 
 	/**

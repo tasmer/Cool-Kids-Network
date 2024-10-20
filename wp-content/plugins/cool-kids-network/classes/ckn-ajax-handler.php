@@ -89,7 +89,7 @@ class CKN_Ajax_Handler {
 			);
 
 			if ( current_user_can( 'coolest_kid' ) ) {
-				$data['role']  = $user->roles[0];
+				$data['role']  = ckn_get_role_name( $user->roles[0] );
 				$data['email'] = $user->user_email;
 			}
 
