@@ -69,6 +69,11 @@ class CKN_Ajax_Handler {
 		$users_data  = array();
 		$user_fields = array( 'Name', 'Country', );
 
+		if ( current_user_can( 'coolest_kid' ) ) {
+			$user_fields[] = 'Role';
+			$user_fields[] = 'Email';
+		}
+
 		$users = get_users( array(
 			'role__in' => array(
 				'cooler_kid',
@@ -78,10 +83,17 @@ class CKN_Ajax_Handler {
 		) );
 
 		foreach ( $users as $user ) {
-			$users_data[] = array(
+			 $data = array(
 				'name'    => $user->first_name . " " . $user->last_name,
 				'country' => get_user_meta( $user->ID, 'country', true ),
 			);
+
+			if ( current_user_can( 'coolest_kid' ) ) {
+				$data['role']  = $user->roles[0];
+				$data['email'] = $user->user_email;
+			}
+
+			$users_data[] = $data;
 		}
 
 		wp_send_json_success( array(

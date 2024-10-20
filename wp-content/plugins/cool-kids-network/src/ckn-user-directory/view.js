@@ -43,7 +43,18 @@ document.addEventListener('DOMContentLoaded', () => {
                         document.querySelector("#user-list > thead").innerHTML = '<tr>' + html + '</tr>';
                         html = '';
                         data.data.users.forEach(user => {
-                            html += '<tr>' + `<th>${user.name}</th> <th>${user.country}</th>` + '</tr>'
+                            html += '<tr>';
+                            html += `<th>${user.name}</th> <th>${user.country}</th>`;
+
+                            if( user.hasOwnProperty('role') ) {
+                                html +=  `<th>${user.role}</th>`;
+                            }
+
+                            if( user.hasOwnProperty('email') ) {
+                                html +=  `<th>${user.email}</th>`;
+                            }
+
+                            html += '</tr>';
                         });
                         document.querySelector("#user-list > tbody").innerHTML = html;
                     }
